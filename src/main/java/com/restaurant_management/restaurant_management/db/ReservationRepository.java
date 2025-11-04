@@ -1,4 +1,8 @@
 package com.restaurant_management.restaurant_management.db;
 
-public interface ReservationRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ReservationRepository extends JpaRepository<Reservation,Integer> {
 }
