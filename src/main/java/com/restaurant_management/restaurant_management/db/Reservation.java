@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,8 +21,12 @@ public class Reservation {
     private Integer id;
     private String customerName;
     private String email;
-    private Date date;
+    private LocalDate date;
     private Time time;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "waiter_id")
+        private Waiter waiter;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -29,5 +34,15 @@ public class Reservation {
             joinColumns = @JoinColumn(name = "reservation_id"),
             inverseJoinColumns = @JoinColumn(name = "table_id")
     )
-    private List<Table> tables;
+    private List<RestaurantTable> restaurantTables = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "{"
+                + "\"id\": " + id + ", "
+                + "\"customerName\": \"" + customerName + "\", "
+                + "\"date\": \"" + date + "\", "
+                + "\"time\": \"" + time + "\""
+                + "}";
+    }
 }

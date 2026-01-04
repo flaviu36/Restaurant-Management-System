@@ -20,6 +20,6 @@ public class Waiter {
     private String email;
 
     @OneToMany(mappedBy = "waiter", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Table> tables;
+    private List<RestaurantTable> restaurantTables;
 
 }

@@ -1,9 +1,7 @@
 package com.restaurant_management.restaurant_management.db;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,8 +9,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Table {
+@jakarta.persistence.Table(name = "restaurant_table")
+public class RestaurantTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,6 +22,6 @@ public class Table {
     @JoinColumn(name = "waiter_id")
     private Waiter waiter;
 
-    @ManyToMany(mappedBy = "tables", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "restaurantTables", fetch = FetchType.EAGER)
     private List<Reservation> reservations;
 }
